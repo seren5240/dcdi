@@ -15,6 +15,7 @@
 set -e
 
 module load python/booth/3.12
+module load R/4.3/4.3.2
 
 for i in {1..10}; do
     mkdir -p p10_e10_linear/dag_${i}

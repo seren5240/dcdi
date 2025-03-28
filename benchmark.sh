@@ -26,11 +26,11 @@ for i in {1..10}; do
             --train \\
             --data-path ./data/perfect/data_p10_e10_n10000_linear_struct \\
             --num-vars 10 \\
-            --i-dataset 10 \\
+            --i-dataset ${i} \\
             --exp-path p10_e10_linear/dag_${i} \\
             --model DCDI-G \\
             --reg-coeff 0.5 \\
-        | tee ${LOG_FILE}; tail -n 1000 ${LOG_FILE} > ${LOG_FILE}.tmp && mv ${LOG_FILE}.tmp ${LOG_FILE}
+        | tee ${LOG_FILE}
     " &
 done
 

@@ -17,9 +17,9 @@ set -e
 module load python/booth/3.12
 
 for i in {1..10}; do
-    mkdir -p p10_e10_linear/dag_${i}
-    
-    LOG_FILE="slurm/out/dag_${i}.txt"
+    RESULTS_FOLDER="p10_e10_linear_dcd"
+    LOG_FILE="${RESULTS_FOLDER}/dag_${i}/log.txt"
+    mkdir -p ${RESULTS_FOLDER}/dag_${i}
 
     srun --exclusive --cpus-per-task=4 --ntasks=1 --nodes=1 bash -c "
         python3 ./main.py \\
@@ -27,8 +27,9 @@ for i in {1..10}; do
             --data-path ./data/perfect/data_p10_e10_n10000_linear_struct \\
             --num-vars 10 \\
             --i-dataset ${i} \\
-            --exp-path p10_e10_linear/dag_${i} \\
+            --exp-path ${RESULTS_FOLDER}/dag_${i} \\
             --model DCDI-G \\
+            --dcd \\
             --reg-coeff 0.5 \\
         | tee ${LOG_FILE}
     " &
